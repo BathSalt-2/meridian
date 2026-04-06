@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    MERIDIAN launcher icon foreground.
+    A stylized leaf within a circle — representing ecological intelligence
+    and the living memory of LOCUS.
+-->
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Outer ring -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,18
+            a36,36 0 1,0 0.001,0
+            Z
+            M54,24
+            a30,30 0 1,1 -0.001,0
+            Z" />
+
+    <!-- Stylized leaf / meridian line -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="
+            M54,34
+            C54,34 38,48 38,57
+            C38,65.8 45.2,73 54,73
+            C62.8,73 70,65.8 70,57
+            C70,48 54,34 54,34
+            Z
+            M54,42
+            C54,42 62,51 62,57
+            C62,61.4 58.4,65 54,65
+            C49.6,65 46,61.4 46,57
+            C46,51 54,42 54,42
+            Z" />
+
+    <!-- Meridian center line -->
+    <path
+        android:fillColor="#2E7D32"
+        android:strokeColor="#2E7D32"
+        android:strokeWidth="2"
+        android:pathData="M54,57 L54,73" />
+
+</vector>

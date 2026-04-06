@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Legacy XML color resources.
+    MERIDIAN's full color palette is defined in Compose: ui/theme/Color.kt
+    These XML resources are referenced by the XML theme (themes.xml) only.
+-->
+<resources>
+    <color name="meridian_green">#2E7D32</color>
+    <color name="meridian_green_light">#4CAF50</color>
+    <color name="meridian_green_container">#D7F0D9</color>
+    <color name="meridian_brown">#5D4037</color>
+    <color name="meridian_background">#F5F5F0</color>
+    <color name="meridian_surface">#FFFFFF</color>
+    <color name="severity_warning">#FF8F00</color>
+    <color name="severity_critical">#C62828</color>
+    <!-- Dark theme -->
+    <color name="meridian_background_dark">#1A1C18</color>
+    <color name="meridian_surface_dark">#2A2D25</color>
+</resources>

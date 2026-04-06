@@ -1,0 +1,19 @@
+# Model directory placeholder
+#
+# Place Gemma 4 model files here before building:
+#
+#   gemma4_e4b_q4.task   (~5.2 GB)  — Primary reasoning model (E4B, Q4 quantized)
+#   gemma4_e2b_q4.task   (~2.8 GB)  — Fallback model for low-RAM devices (E2B, Q4)
+#
+# Download from:
+#   Google AI Edge Gallery: https://ai.google.dev/edge/mediapipe/solutions/genai/llm_inference
+#   Kaggle: https://www.kaggle.com/models/google/gemma
+#   Hugging Face: https://huggingface.co/google/gemma-4
+#
+# IMPORTANT: Model files are excluded from this repository (.gitignore)
+# They must be placed locally before building a production APK.
+# The debug APK built by CI will build successfully but will show a
+# 'Model not found' error at runtime until the model file is present.
+#
+# For CI builds demonstrating the app shell, the GemmaEngine gracefully
+# handles a missing model and falls back to mock responses.

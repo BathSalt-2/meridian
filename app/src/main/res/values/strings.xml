@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MERIDIAN</string>
+    <string name="app_description">Ecological Intelligence for Communities</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome_title">Welcome to MERIDIAN</string>
+    <string name="onboarding_welcome_subtitle">Your community&#8217;s ecological intelligence system.</string>
+    <string name="onboarding_community_hint">e.g. Mwangi Village</string>
+    <string name="onboarding_region_hint">e.g. Kirinyaga County, Kenya</string>
+    <string name="onboarding_cta_continue">Continue</string>
+    <string name="onboarding_cta_start">Start Using MERIDIAN</string>
+
+    <!-- IRIS -->
+    <string name="iris_title">IRIS Observation</string>
+    <string name="iris_analyzing">IRIS is analyzing…</string>
+    <string name="iris_analyzing_subtitle">Gemma 4 E4B running differential diagnosis</string>
+    <string name="iris_result_primary">Primary Finding</string>
+    <string name="iris_save_locus">Save to LOCUS</string>
+    <string name="iris_saved">Saved to LOCUS</string>
+    <string name="iris_new_observation">New Observation</string>
+    <string name="iris_confidence">%1$d%% confidence</string>
+
+    <!-- LOCUS -->
+    <string name="locus_title">LOCUS — Community Map</string>
+    <string name="locus_add_place">Add Place</string>
+    <string name="locus_place_name_hint">e.g. East Maize Field</string>
+    <string name="locus_landmark_hint">e.g. north of the baobab tree</string>
+    <string name="locus_no_places">No places registered</string>
+    <string name="locus_no_places_sub">Add your fields, water sources, and forest patches to start building the LOCUS knowledge map.</string>
+    <string name="locus_no_observations">No observations yet. Use IRIS to record the first observation at this location.</string>
+
+    <!-- PRAXIS -->
+    <string name="praxis_title">PRAXIS Intelligence</string>
+    <string name="praxis_reasoning_title">PRAXIS Reasoning Chain</string>
+    <string name="praxis_reasoning_streaming">PRAXIS is reasoning…</string>
+    <string name="praxis_no_alerts">No active alerts</string>
+    <string name="praxis_no_alerts_sub">PRAXIS is monitoring your fields.</string>
+    <string name="praxis_resolve">Resolve</string>
+    <string name="praxis_actions_title">Recommended Actions</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_quick_observe">Observe</string>
+    <string name="dashboard_quick_map">LOCUS Map</string>
+    <string name="dashboard_quick_praxis">PRAXIS</string>
+    <string name="dashboard_active_alerts">Active Alerts</string>
+    <string name="dashboard_recent_observations">Recent Observations</string>
+    <string name="dashboard_engine_loading">Gemma 4 is loading… IRIS and PRAXIS will be ready shortly.</string>
+    <string name="dashboard_engine_degraded">Running in low-memory mode (E2B). Some features reduced.</string>
+
+    <!-- PRAXIS notification channel -->
+    <string name="channel_praxis_id">praxis_alerts</string>
+    <string name="channel_praxis_name">PRAXIS Alerts</string>
+    <string name="channel_praxis_description">Proactive agricultural and ecological alerts from the PRAXIS reasoning engine</string>
+
+    <!-- Accessibility -->
+    <string name="cd_back">Back</string>
+    <string name="cd_camera_capture">Capture observation</string>
+    <string name="cd_alert_severity">Alert severity</string>
+    <string name="cd_engine_status">AI engine status</string>
+</resources>

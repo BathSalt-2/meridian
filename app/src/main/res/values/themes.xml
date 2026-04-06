@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Base application theme.
+        MERIDIAN uses Jetpack Compose Material3 for all UI,
+        so this XML theme only applies to the system chrome
+        (status bar, navigation bar) before Compose takes over.
+
+        The full Material3 theme is defined in:
+        ui/theme/Theme.kt (MeridianTheme composable)
+        ui/theme/Color.kt (MERIDIAN earth-and-growth palette)
+        ui/theme/Type.kt  (MERIDIAN typography scale)
+    -->
+    <style name="Theme.Meridian" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Status bar color is set programmatically in MeridianTheme composable -->
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="android:windowBackground">#F5F5F0</item>
+    </style>
+
+    <!-- Splash screen theme (shown before Compose loads) -->
+    <style name="Theme.Meridian.Splash" parent="Theme.Meridian">
+        <item name="android:windowBackground">#2E7D32</item>
+    </style>
+</resources>

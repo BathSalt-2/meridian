@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    FileProvider paths for MERIDIAN.
+
+    iris_captures/ — temporary JPEG files captured by IRIS during observation sessions.
+                     Files are deleted after LOCUS processes the observation.
+
+    models/         — Gemma 4 model files loaded by GemmaEngine.
+                     These are large (3-18GB) and are placed here post-install.
+-->
+<paths>
+    <cache-path
+        name="iris_captures"
+        path="iris_captures/" />
+    <files-path
+        name="models"
+        path="models/" />
+    <external-cache-path
+        name="shared_images"
+        path="iris_exports/" />
+</paths>

@@ -1,0 +1,128 @@
+name: Build MERIDIAN APK
+
+# Builds the debug APK on every push to main.
+# On Release published: attaches the APK directly to the GitHub Release assets.
+# APK is always available as a downloadable workflow artifact (90-day retention).
+
+on:
+  push:
+    branches: [ main ]
+  release:
+    types: [ published ]
+  workflow_dispatch:
+    inputs:
+      notes:
+        description: 'Build notes (optional)'
+        required: false
+        default: 'Manual build trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build Debug APK
+    runs-on: ubuntu-latest
+
+    steps:
+      # ------------------------------------------------------------------ #
+      # 1. Source
+      # ------------------------------------------------------------------ #
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ------------------------------------------------------------------ #
+      # 2. Java + Gradle
+      # ------------------------------------------------------------------ #
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', '**/libs.versions.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # ------------------------------------------------------------------ #
+      # 3. Build
+      # Note: uses the pre-installed `gradle` command on ubuntu-latest.
+      # The Gemma 4 model file is NOT bundled — it is loaded at runtime from
+      # app/src/main/assets/models/. The APK will build successfully without
+      # the model file; inference will not function until the model is placed
+      # in the assets directory before building a production APK.
+      # ------------------------------------------------------------------ #
+      - name: Build Debug APK
+        run: |
+          gradle :app:assembleDebug \
+            --no-daemon \
+            --stacktrace \
+            -Pandroid.suppressUnsupportedCompileSdkVersionError=true
+
+      # ------------------------------------------------------------------ #
+      # 4. Stage artifact
+      # ------------------------------------------------------------------ #
+      - name: Stage APK for upload
+        run: |
+          mkdir -p dist
+          APK_SRC="app/build/outputs/apk/debug/app-debug.apk"
+          APK_DST="dist/MERIDIAN-v1.0.0-alpha-debug.apk"
+          if [ -f "$APK_SRC" ]; then
+            cp "$APK_SRC" "$APK_DST"
+            echo "APK staged: $APK_DST"
+            ls -lh "$APK_DST"
+          else
+            echo "::error::APK not found at $APK_SRC"
+            exit 1
+          fi
+
+      # ------------------------------------------------------------------ #
+      # 5. Upload as workflow artifact (always available from Actions tab)
+      # ------------------------------------------------------------------ #
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MERIDIAN-APK-build-${{ github.run_number }}
+          path: dist/MERIDIAN-v1.0.0-alpha-debug.apk
+          retention-days: 90
+          if-no-files-found: error
+
+      # ------------------------------------------------------------------ #
+      # 6. Attach APK to GitHub Release (only on release event)
+      # ------------------------------------------------------------------ #
+      - name: Attach APK to GitHub Release
+        if: github.event_name == 'release'
+        run: |
+          gh release upload "${{ github.ref_name }}" \
+            dist/MERIDIAN-v1.0.0-alpha-debug.apk \
+            --clobber
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # ------------------------------------------------------------------ #
+      # 7. Build summary
+      # ------------------------------------------------------------------ #
+      - name: Write build summary
+        if: always()
+        run: |
+          echo "## MERIDIAN APK Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "| Field | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Commit | \`${{ github.sha }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Branch | ${{ github.ref_name }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Run | #${{ github.run_number }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Trigger | ${{ github.event_name }} |" >> $GITHUB_STEP_SUMMARY
+          if [ -f dist/MERIDIAN-v1.0.0-alpha-debug.apk ]; then
+            APK_SIZE=$(du -sh dist/MERIDIAN-v1.0.0-alpha-debug.apk | cut -f1)
+            echo "| APK Size | $APK_SIZE |" >> $GITHUB_STEP_SUMMARY
+            echo "| Status | ✅ Build Successful |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "| Status | ❌ Build Failed |" >> $GITHUB_STEP_SUMMARY
+          fi
